@@ -24,9 +24,8 @@ The end goal for this project is something like what Chocolate Doom is for Doom:
 # Not working:
 - Music
   - SDL_Mixer can't play the multi track XMI midi files, need to find another solution for those
-  - There is basic midi music support if there are .mid files in `/res/data/music` like `thm0.mid`
-- Main Menu
-  - the original main menu should be revived, instead of the Mac version
+  - There is basic midi music support if there are .mid files in `/res/data/music` like `thm0.mid`.
+    Try this [example music pack made of Chicajo midi's](https://drive.google.com/open?id=18KhiHpmPHGuTedMCPifnox2DWLd2GnCW)
 - Video Files / Audiologs
   - Need to revive the old movie rendering code in AFile
 
@@ -40,7 +39,11 @@ Compiling / Running
     - Floppy disk assets are an older version that we can't load currently
   
 ## Building SDL
+### Linux/Mac
 You can use the included `build_deps.sh` shell script to build the required versions of SDL2 / SDL2_mixer. VOC support was broken until recently in SDL_mixer, so for sound effects to work you'll probably need to build it from the latest sources like that script does.
+
+### Windows
+See [the Windows readme](windows/readme_windows.md).
 
 ## Build and run
 ```

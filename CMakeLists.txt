@@ -200,14 +200,25 @@ include_directories(
 	src/Libraries/SND/Source
 	src/Libraries/H
 	src/Libraries/LG/Source
+	src/Libraries/LG/Source/LOG/src
 	src/GameSrc/Headers
 	src/MacSrc
 )
 
 if(ENABLE_EXAMPLES)
 
+add_executable(playmov
+	src/Libraries/AFILE/Tests/playmov.c
+)
 add_executable(movinfo
 	src/Libraries/AFILE/Tests/movinfo.c
+)
+
+target_link_libraries(playmov
+	AFILE_LIB
+	FIX_LIB
+	${SDL2_LIBRARIES}
+	${SDL2_MIXER_LIBRARIES}
 )
 
 target_link_libraries(movinfo

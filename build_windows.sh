@@ -71,11 +71,12 @@ fi
 
 # Back to the root directory, copy SDL DLL files for the executable
 cd ..
-cp /usr/local/bin/*.dll .
+cp /usr/local/bin/SDL*.dll .
 
 # Set up build.bat
 # TODO: conditional on whether CMake was downloaded
-echo "@set PATH=%PATH%;${CMAKE_ROOT}
+echo "@echo off
+set PATH=%PATH%;${CMAKE_ROOT}
 cmake -G \"MinGW Makefiles\" .
 mingw32-make systemshock" >build.bat
 

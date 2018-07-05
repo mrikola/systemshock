@@ -97,7 +97,6 @@ set(2D_SRC
 	2D/Source/Flat8/fl8cply.c
 	2D/Source/Flat8/fl8clin.c
 	2D/Source/Flat8/fl8lp.c
-	2D/Source/Flat8/fl8cft.h
 	2D/Source/Flat8/fl8lf.c
 	2D/Source/Flat8/fl8ll.c
 	2D/Source/Flat8/fl8s.c
@@ -238,6 +237,7 @@ set(INPUT_SRC
 )
 
 set(LG_SRC
+	LG/Source/LOG/src/log.c
 	LG/Source/dbg.c
 	LG/Source/LGmem.c
 	LG/Source/lgsprntf.c
@@ -366,6 +366,7 @@ include_directories(
 	${CMAKE_SOURCE_DIR}/src/Libraries/INPUT/Source
 	${CMAKE_SOURCE_DIR}/src/Libraries/FIX/Source
 	${CMAKE_SOURCE_DIR}/src/Libraries/LG/Source
+	${CMAKE_SOURCE_DIR}/src/Libraries/LG/Source/LOG/src
 	${CMAKE_SOURCE_DIR}/src/Libraries/RES/Source
 	${CMAKE_SOURCE_DIR}/src/Libraries/FIXPP/Source
 	${CMAKE_SOURCE_DIR}/src/Libraries/EDMS/Source
