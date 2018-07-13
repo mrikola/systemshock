@@ -31,9 +31,9 @@ function build_sdl_mixer {
 
 	./configure "CFLAGS=-m32" "CXXFLAGS=-m32" --host=i686-w64-mingw32 --disable-sdltest --with-sdl-prefix=${install_dir}/built_sdl --prefix=${install_dir}/built_sdl_mixer 
 	
-	#remove_mwindows
-	#make
-	#make install
+	remove_mwindows
+	make
+	make install
 
 	popd
 }
@@ -76,7 +76,7 @@ cp build_ext/built_sdl/bin/SDL*.dll .
 cp build_ext/built_sdl_mixer/bin/SDL*.dll .
 
 # Set up build.bat
-if [[ -z "${appveyor}" ]]; then
+if [[ -z "${APPVEYOR}" ]]; then
 	echo "NORMAL BUILD YO"
 	echo "@echo off
 	set PATH=%PATH%;${CMAKE_ROOT}
