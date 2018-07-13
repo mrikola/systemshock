@@ -1,19 +1,40 @@
 image: Visual Studio 2015
 
 branches:
-    only:
-        - master
-        - appveyor-config
+  only:
+    - master
+    - appveyor-config
+
+cache:
+  - build_ext  # uncache this if external deps change (eg. SDL_mixer 2.0.3 gets released)
         
 build_script:
-    - cmd: mklink /D c:\git "C:\Program Files\Git"
-    - cmd: set PATH=%PATH:C:\Program Files (x86)\Git\bin;=%
-    - cmd: set PATH=c:\git\usr\bin;%PATH%;C:\MinGW\bin
-    - cmd: copy windows\make.exe \git\usr\bin
-    - cmd: set CMAKE_MAKE_PROGRAM=c:\git\usr\bin\make.exe
-    - cmd: set APPVEYOR=TRUE
-    - cmd: sh build_windows.sh
-    - cmd: build.bat
-    
-deploy: off
+  - mklink /D c:\git "C:\Program Files\Git"
+  - set PATH=%PATH:C:\Program Files (x86)\Git\bin;=%
+  - set PATH=c:\git\usr\bin;%PATH%;C:\MinGW\bin
+  - copy windows\make.exe \git\usr\bin
+  - set CMAKE_MAKE_PROGRAM=c:\git\usr\bin\make.exe
+  - set APPVEYOR=TRUE
+  - sh build_windows.sh
+  - build.bat
+
 test: off
+
+after_build:
+  - copy c:\mingw\bin\libgcc*.dll .
+  - copy c:\mingw\bin\libstdc++*.dll .
+  - 7z a systemshock.zip systemshock.exe *.dll 
+
+artifacts:
+  - path: systemshock.zip
+    name: Shockolate
+  
+deploy:
+  - provider: GitHub
+    release: Shockolate-v$(appveyor_build_version)
+    description: 'Latest and greatest Shockolate for Windows'
+    artifact: systemshock.zip
+    auth_token:
+      secure: 4oa2yc5W2R7oqYQfqkQnqi2yl0v5tSeh58GS+su7tsAXMaM77BeWhSDs+p7T4cWy
+
+    
