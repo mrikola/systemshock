@@ -62,7 +62,7 @@ cd ./build_ext/
 install_dir=`pwd -W`
 
 build_sdl
-ll /usr/local/lib
+ls -la /usr/local/lib
 export LD_LIBRARY_PATH=/usr/local/lib
 build_sdl_mixer
 
