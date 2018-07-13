@@ -60,6 +60,7 @@ cp windows/make.exe /usr/bin/
 mkdir ./build_ext/
 cd ./build_ext/
 install_dir=`pwd -W`
+echo "HOST IS ${host}"
 
 build_sdl
 build_sdl_mixer
