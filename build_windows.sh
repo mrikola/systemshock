@@ -61,9 +61,9 @@ mkdir ./build_ext/
 cd ./build_ext/
 install_dir=`pwd -W`
 
+export LD_LIBRARY_PATH = ${install_dir}/built_sdl/lib
+
 build_sdl
-ls -la /usr/local/lib
-export LD_LIBRARY_PATH=/usr/local/lib
 build_sdl_mixer
 
 if ! [ -x "$(command -v cmake)" ]; then
