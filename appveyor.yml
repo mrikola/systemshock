@@ -23,8 +23,8 @@ test: off
 after_build:
   - copy c:\mingw\bin\libgcc*.dll .
   - copy c:\git\mingw64\bin\libstd*.dll .
-  - copy build_ext/built_sdl/bin/SDL*.dll .
-  - copy build_ext/built_sdl_mixer/bin/SDL*.dll .
+  - copy build_ext\built_sdl\bin\SDL*.dll .
+  - copy build_ext\built_sdl_mixer\bin\SDL*.dll .
   - 7z a systemshock.zip systemshock.exe *.dll 
 
 artifacts:
@@ -39,4 +39,4 @@ deploy:
     auth_token:
       secure: 4oa2yc5W2R7oqYQfqkQnqi2yl0v5tSeh58GS+su7tsAXMaM77BeWhSDs+p7T4cWy
 
-    
+notifications: off    
