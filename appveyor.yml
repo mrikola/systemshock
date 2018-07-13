@@ -12,6 +12,7 @@ build_script:
     - cmd: mklink /D c:\git "C:\Program Files\Git"
     - cmd: set PATH=%PATH:C:\Program Files (x86)\Git\bin;=%
     - cmd: set PATH=c:\git\usr\bin;%PATH%;C:\MinGW\bin
+    - cmd: set CMAKE_MAKE_PROGRAM=c:\projects\systemshock\windows\make.exe
 #    - cmd: sh build_windows.sh
     - cmd: build.bat
     
