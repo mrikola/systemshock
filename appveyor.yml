@@ -22,7 +22,8 @@ test: off
 
 after_build:
   - copy c:\mingw\bin\libgcc*.dll .
-  - copy c:\mingw\bin\libstdc++*.dll .
+  # - copy c:\mingw\bin\libstd*.dll .
+  - dir c:\mingw\bin\*.dll
   - 7z a systemshock.zip systemshock.exe *.dll 
 
 artifacts:
