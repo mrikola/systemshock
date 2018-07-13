@@ -9,7 +9,7 @@ cache:
   - build_ext  # uncache this if external deps change (eg. SDL_mixer 2.0.3 gets released)
 
 init:
-  - dir c:\git
+  - dir "C:\Program Files\Git"
   
 build_script:
   - mklink /D c:\git "C:\Program Files\Git"
