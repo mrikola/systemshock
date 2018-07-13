@@ -9,7 +9,8 @@ environment:
     appveyor: true
     
 build_script:
-    - cmd: set PATH=%PATH%;C:\MinGW\bin
+    - cmd: mklink /D c:\git "C:\Program Files\Git"
+    - cmd: set PATH=c:\git\usr\bin%PATH%;C:\MinGW\bin
     - cmd: sh build_windows.sh
     - cmd: build.bat
     
