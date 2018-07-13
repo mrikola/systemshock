@@ -64,7 +64,7 @@ install_dir=`pwd -W`
 export LD_LIBRARY_PATH=${install_dir}/built_sdl/lib
 
 build_sdl
-cp ${install_dir}/built_sdl/lib/* c:/MinGW/lib
+cp ${install_dir}/built_sdl/lib/*.* c:/MinGW/lib
 build_sdl_mixer
 
 if ! [ -x "$(command -v cmake)" ]; then
