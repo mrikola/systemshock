@@ -7,7 +7,10 @@ branches:
 
 cache:
   - build_ext  # uncache this if external deps change (eg. SDL_mixer 2.0.3 gets released)
-        
+
+init:
+  - dir c:\git
+  
 build_script:
   - mklink /D c:\git "C:\Program Files\Git"
   - set PATH=%PATH:C:\Program Files (x86)\Git\bin;=%
