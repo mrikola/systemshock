@@ -9,6 +9,7 @@ environment:
     appveyor: true
     
 build_script:
+    - cmd: set PATH=%PATH%;C:\MinGW\bin
     - cmd: sh build_windows.sh
     - cmd: build.bat
     
