@@ -17,7 +17,7 @@ function build_sdl {
 	tar xvf SDL2-${SDL_version}.tar.gz
 	pushd SDL2-${SDL_version}
 
-	./configure "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32" --host=i686-w64-mingw32 --prefix=${install_dir}/built_sdl
+	./configure "CFLAGS=-m32" "CXXFLAGS=-m32" --host=i686-w64-mingw32 --prefix=${install_dir}/built_sdl
 	remove_mwindows
 	make
 	make install
@@ -29,7 +29,7 @@ function build_sdl_mixer {
 	git clone https://github.com/SDL-mirror/SDL_mixer.git
 	pushd SDL_mixer
 
-	./configure "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32" --host=i686-w64-mingw32 --with-sdl-prefix=${install_dir}/built_sdl --prefix=${install_dir}/built_sdl_mixer
+	./configure "CFLAGS=-m32" "CXXFLAGS=-m32" --host=i686-w64-mingw32 --with-sdl-prefix=${install_dir}/built_sdl --prefix=${install_dir}/built_sdl_mixer
 	remove_mwindows
 	make
 	make install
@@ -61,10 +61,10 @@ mkdir ./build_ext/
 cd ./build_ext/
 install_dir=`pwd -W`
 
-export LD_LIBRARY_PATH=${install_dir}/built_sdl/lib
+export CPPFLAGS="-m32 -I${install_dir}/built_sdl/include"
+export LDFLAGS="-m32 -L${install_dir}/built_sdl/lib"
 
 build_sdl
-cp ${install_dir}/built_sdl/lib/*.* c:/MinGW/lib
 build_sdl_mixer
 
 if ! [ -x "$(command -v cmake)" ]; then
@@ -83,7 +83,7 @@ if [[ -z "${appveyor}" ]]; then
 	cmake -G \"MinGW Makefiles\" .
 	mingw32-make systemshock" >build.bat
 else
-	echo "cmake -G \"MSYS Makefiles\" . 
+	echo "cmake -G \"Unix Makefiles\" . 
 	make systemshock" >build.bat
 fi
 

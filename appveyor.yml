@@ -14,7 +14,7 @@ build_script:
     - cmd: set PATH=c:\git\usr\bin;%PATH%;C:\MinGW\bin
     - cmd: copy windows\make.exe \git\usr\bin
     - cmd: set CMAKE_MAKE_PROGRAM=c:\git\usr\bin\make.exe
-#    - cmd: sh build_windows.sh
+    - cmd: sh build_windows.sh
     - cmd: build.bat
     
 deploy: off
