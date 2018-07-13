@@ -1,0 +1,21 @@
+image: Visual Studio 2015
+
+branches:
+    only:
+        - master
+        - appveyor-config
+        
+environment:
+    # foo: bar
+    
+cache:
+    - build_ext
+    
+install:
+    - sh: build_windows.sh
+
+build_script:
+    - cmd: build.bat
+    
+deploy: off
+test: off
