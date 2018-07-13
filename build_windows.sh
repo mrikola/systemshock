@@ -17,7 +17,7 @@ function build_sdl {
 	tar xvf SDL2-${SDL_version}.tar.gz
 	pushd SDL2-${SDL_version}
 
-	./configure "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32" --prefix=${install_dir}/built_sdl
+	./configure "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32" --host=*-*-mingw32 --prefix=${install_dir}/built_sdl
 	remove_mwindows
 	make
 	make install
@@ -29,7 +29,7 @@ function build_sdl_mixer {
 	git clone https://github.com/SDL-mirror/SDL_mixer.git
 	pushd SDL_mixer
 
-	./configure "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32" --prefix=${install_dir}/built_sdl_mixer
+	./configure "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32" --host=*-*-mingw32 --prefix=${install_dir}/built_sdl_mixer
 	remove_mwindows
 	make
 	make install
@@ -60,7 +60,6 @@ cp windows/make.exe /usr/bin/
 mkdir ./build_ext/
 cd ./build_ext/
 install_dir=`pwd -W`
-echo "HOST IS ${host}"
 
 build_sdl
 build_sdl_mixer
