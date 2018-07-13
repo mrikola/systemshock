@@ -5,7 +5,7 @@ branches:
         - master
         - appveyor-config
         
-environment:
+#environment:
     # foo: bar
     
 cache:
