@@ -74,10 +74,14 @@ cd ..
 cp /usr/local/bin/SDL*.dll .
 
 # Set up build.bat
-# TODO: conditional on whether CMake was downloaded
-echo "@echo off
-set PATH=%PATH%;${CMAKE_ROOT}
-cmake -G \"MinGW Makefiles\" .
-mingw32-make systemshock" >build.bat
+if [[ -z "${appveyor}" ]]; then
+	echo "@echo off
+	set PATH=%PATH%;${CMAKE_ROOT}
+	cmake -G \"MinGW Makefiles\" .
+	mingw32-make systemshock" >build.bat
+else
+	echo "cmake -G \"MSYS Makefiles\" . 
+	make systemshock" >build.bat
+fi
 
 echo "Our work here is done. Run BUILD.BAT in a Windows shell to build the actual source."

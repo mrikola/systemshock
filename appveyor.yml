@@ -5,16 +5,11 @@ branches:
         - master
         - appveyor-config
         
-#environment:
-    # foo: bar
+environment:
+    appveyor: true
     
-cache:
-    - build_ext
-    
-install:
-    - sh: build_windows.sh
-
 build_script:
+    - sh: build_windows.sh
     - cmd: build.bat
     
 deploy: off
