@@ -62,8 +62,6 @@ cp windows/make.exe /usr/bin/
 mkdir ./build_ext/
 cd ./build_ext/
 install_dir=`pwd -W`
-CPPFLAGS=-m32 -I${install_dir}/built_sdl/include
-LDFLAGS=-m32 -L${install_dir}/built_sdl/lib
 
 build_sdl
 build_sdl_mixer
