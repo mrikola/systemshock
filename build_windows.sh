@@ -1,5 +1,5 @@
 #!/bin/bash
-# set -e
+set -e
 
 SDL_version=2.0.8
 SDL_mixer_version=2.0.2

@@ -22,8 +22,9 @@ test: off
 
 after_build:
   - copy c:\mingw\bin\libgcc*.dll .
-  # - copy c:\mingw\bin\libstd*.dll .
-  - dir c:\mingw\bin\*.dll
+  - copy c:\git\mingw32\bin\libstd*.dll .
+  - copy build_ext/built_sdl/bin/SDL*.dll .
+  - copy build_ext/built_sdl_mixer/bin/SDL*.dll .
   - 7z a systemshock.zip systemshock.exe *.dll 
 
 artifacts:
