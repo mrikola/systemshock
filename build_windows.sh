@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+# set -e
 
 SDL_version=2.0.8
 SDL_mixer_version=2.0.2
@@ -29,10 +29,11 @@ function build_sdl_mixer {
 	git clone https://github.com/SDL-mirror/SDL_mixer.git
 	pushd SDL_mixer
 
-	./configure "CFLAGS=-m32" "CXXFLAGS=-m32" --host=i686-w64-mingw32 --with-sdl-prefix=${install_dir}/built_sdl --prefix=${install_dir}/built_sdl_mixer
-	remove_mwindows
-	make
-	make install
+	./configure "CFLAGS=-m32" "CXXFLAGS=-m32" --host=i686-w64-mingw32 --with-sdl-prefix=${install_dir}/built_sdl --prefix=${install_dir}/built_sdl_mixer || cat config.log
+	
+	#remove_mwindows
+	#make
+	#make install
 
 	popd
 }
@@ -60,9 +61,8 @@ cp windows/make.exe /usr/bin/
 mkdir ./build_ext/
 cd ./build_ext/
 install_dir=`pwd -W`
-
-export CPPFLAGS="-m32 -I${install_dir}/built_sdl/include"
-export LDFLAGS="-m32 -L${install_dir}/built_sdl/lib"
+CPPFLAGS=-m32 -I${install_dir}/built_sdl/include
+LDFLAGS=-m32 -L${install_dir}/built_sdl/lib
 
 build_sdl
 build_sdl_mixer
