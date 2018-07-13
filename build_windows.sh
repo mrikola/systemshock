@@ -61,7 +61,7 @@ mkdir ./build_ext/
 cd ./build_ext/
 install_dir=`pwd -W`
 
-export LD_LIBRARY_PATH = ${install_dir}/built_sdl/lib
+export LD_LIBRARY_PATH=${install_dir}/built_sdl/lib
 
 build_sdl
 build_sdl_mixer
