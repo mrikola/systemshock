@@ -29,7 +29,8 @@ function build_sdl_mixer {
 	git clone https://github.com/SDL-mirror/SDL_mixer.git
 	pushd SDL_mixer
 
-	./configure "CFLAGS=-m32" "CXXFLAGS=-m32" --host=i686-w64-mingw32 --with-sdl-prefix=${install_dir}/built_sdl --prefix=${install_dir}/built_sdl_mixer || cat config.log
+	./configure "CFLAGS=-m32" "CXXFLAGS=-m32" --host=i686-w64-mingw32 --with-sdl-prefix=${install_dir}/built_sdl --prefix=${install_dir}/built_sdl_mixer 
+	cat conftest.err
 	
 	#remove_mwindows
 	#make
