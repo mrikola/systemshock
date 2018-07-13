@@ -29,7 +29,7 @@ function build_sdl_mixer {
 	git clone https://github.com/SDL-mirror/SDL_mixer.git
 	pushd SDL_mixer
 
-	./configure "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32 -L${install_dir}/built_sdl/lib" --host=i686-w64-mingw32 --with-sdl-prefix=${install_dir}/built_sdl --prefix=${install_dir}/built_sdl_mixer
+	./configure "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32" --host=i686-w64-mingw32 --with-sdl-prefix=${install_dir}/built_sdl --prefix=${install_dir}/built_sdl_mixer
 	remove_mwindows
 	make
 	make install
@@ -62,6 +62,8 @@ cd ./build_ext/
 install_dir=`pwd -W`
 
 build_sdl
+ll /usr/local/lib
+export LD_LIBRARY_PATH=/usr/local/lib
 build_sdl_mixer
 
 if ! [ -x "$(command -v cmake)" ]; then
