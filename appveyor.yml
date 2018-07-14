@@ -5,6 +5,8 @@ branches:
     - master
     - appveyor-config
 
+skip_tags: true    
+    
 cache:
   - build_ext  # uncache this if external deps change (eg. SDL_mixer 2.0.3 gets released)
   
