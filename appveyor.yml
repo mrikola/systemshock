@@ -1,4 +1,5 @@
 # Despite its name, this image actually contains all sorts of non-VC goodies
+# https://www.appveyor.com/docs/build-environment/ for all the details
 image: Visual Studio 2015
 
 # appveyor-config can, of course, be removed once the branch is merged to master
@@ -8,9 +9,10 @@ branches:
     - appveyor-config
 
 # This is necessary because Appveyor creates a tag for artifacts it releases
-# -- so without this we create releases forever
+# -- so without this we'd create releases forever
 skip_tags: true    
 
+# Tell build_windows.sh that we're building for Appveyor
 environment:
   APPVEYOR: TRUE
     
@@ -30,7 +32,6 @@ build_script:
   - set PATH=c:\git\usr\bin;%PATH%;C:\MinGW\bin
   - copy windows\make.exe \git\usr\bin
   - set CMAKE_MAKE_PROGRAM=c:\git\usr\bin\make.exe
-#  - set APPVEYOR=TRUE
   - sh build_windows.sh
   - build.bat
 
@@ -49,12 +50,12 @@ artifacts:
   - path: systemshock.zip
     name: Shockolate
 
-# Replace the auth_token with your own
+# FIXME: Replace the auth_token with your own
     
 deploy:
   - provider: GitHub
     release: Shockolate-v$(appveyor_build_version)
-    description: 'Latest and greatest Shockolate for Windows'
+    description: 'Latest master branch build of Shockolate for Windows'
     artifact: systemshock.zip
     auth_token:
       secure: 4oa2yc5W2R7oqYQfqkQnqi2yl0v5tSeh58GS+su7tsAXMaM77BeWhSDs+p7T4cWy
