@@ -77,13 +77,11 @@ cp build_ext/built_sdl_mixer/bin/SDL*.dll .
 
 # Set up build.bat
 if [[ -z "${APPVEYOR}" ]]; then
-	echo "NORMAL BUILD YO"
 	echo "@echo off
 	set PATH=%PATH%;${CMAKE_ROOT}
 	cmake -G \"MinGW Makefiles\" .
 	mingw32-make systemshock" >build.bat
 else
-	echo "APPVEYOR"
 	echo "cmake -G \"Unix Makefiles\" . 
 	make systemshock" >build.bat
 fi
