@@ -48,6 +48,19 @@ function get_cmake {
 
 ## Actual building starts here
 
+# Set up build.bat
+if [[ -z "${APPVEYOR}" ]]; then
+	echo "Normal build"
+	echo "@echo off
+	set PATH=%PATH%;${CMAKE_ROOT}
+	cmake -G \"MinGW Makefiles\" .
+	mingw32-make systemshock" >build.bat
+else
+	echo "Appveyor"
+	echo "cmake -G \"Unix Makefiles\" . 
+	make systemshock" >build.bat
+fi
+
 if [ -d ./build_ext/ ]; then
 	echo A directory named build_ext already exists.
 	echo Please remove it if you want to recompile.
@@ -75,15 +88,5 @@ cd ..
 cp build_ext/built_sdl/bin/SDL*.dll .
 cp build_ext/built_sdl_mixer/bin/SDL*.dll .
 
-# Set up build.bat
-if [[ -z "${APPVEYOR}" ]]; then
-	echo "@echo off
-	set PATH=%PATH%;${CMAKE_ROOT}
-	cmake -G \"MinGW Makefiles\" .
-	mingw32-make systemshock" >build.bat
-else
-	echo "cmake -G \"Unix Makefiles\" . 
-	make systemshock" >build.bat
-fi
 
 echo "Our work here is done. Run BUILD.BAT in a Windows shell to build the actual source."
