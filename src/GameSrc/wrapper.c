@@ -1042,22 +1042,14 @@ void clear_obuttons() {
     LG_memset(OButtons, 0, MAX_OPTION_BUTTONS * sizeof(opt_button));
 }
 
-<<<<<<< HEAD
 void opanel_redraw(uchar back)
 {
    extern grs_bitmap inv_backgnd;
    int but;
-   Rect r = { INVENTORY_PANEL_Y , INVENTORY_PANEL_X,
+   LGRect r = { INVENTORY_PANEL_Y , INVENTORY_PANEL_X,
         INVENTORY_PANEL_Y + INVENTORY_PANEL_HEIGHT,
 		INVENTORY_PANEL_X + INVENTORY_PANEL_WIDTH
    };
-=======
-void opanel_redraw(uchar back) {
-    extern grs_bitmap inv_backgnd;
-    int but;
-    LGRect r = {{INVENTORY_PANEL_X, INVENTORY_PANEL_Y},
-                {INVENTORY_PANEL_X + INVENTORY_PANEL_WIDTH, INVENTORY_PANEL_Y + INVENTORY_PANEL_HEIGHT}};
->>>>>>> master
 #ifdef SVGA_SUPPORT
     uchar old_over = gr2ss_override;
     gr2ss_override = OVERRIDE_ALL; // Since we are really going straight to screen in our heart of hearts

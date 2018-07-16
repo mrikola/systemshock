@@ -44,7 +44,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
 
 #include "lg.h"
 //#include <rsd.h>
@@ -298,7 +297,7 @@ int32_t AmovReadAudio(Afile *paf, void *paudio) {
             TRACE("%s: got audio chunk in 0x%08x offset", __FUNCTION__, pmi->pcurrChunk->offset);
             fseek(paf->fp, pmi->pcurrChunk->offset, SEEK_SET);
             fread(p, MOVIE_DEFAULT_BLOCKLEN, 1, paf->fp);
-            memcpy(paudio + i, p, MOVIE_DEFAULT_BLOCKLEN);
+            // memcpy(paudio + i, p, MOVIE_DEFAULT_BLOCKLEN);
             i += MOVIE_DEFAULT_BLOCKLEN;
         }
         pmi->pcurrChunk++;

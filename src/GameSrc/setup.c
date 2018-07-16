@@ -1078,7 +1078,7 @@ errtype load_savegame_names() {
     for (i = 0; i < NUM_SAVE_SLOTS; i++) {
         Poke_SaveName(i);
 
-        if (access(save_game_name, F_OK) != -1) {
+        if (access(save_game_name, 0) != -1) {
             file = ResOpenFile(save_game_name);
             if (ResInUse(OLD_SAVE_GAME_ID_BASE)) {
 #ifdef OLD_SG_FORMAT

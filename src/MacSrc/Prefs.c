@@ -34,6 +34,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "olhext.h"
 #include "lg_types.h"
 
+#ifdef _MSC_VER
+// not #if defined(_WIN32) || defined(_WIN64) because we have strncasecmp in mingw
+#define strncasecmp _strnicmp
+#define strcasecmp _stricmp
+#endif
+
 static void SetShockGlobals(void);
 
 //--------------------
@@ -96,7 +102,7 @@ static FILE *open_prefs(const char *mode) {
     char fullname[512];
     char *path = SDL_GetPrefPath("Interrupt", "SystemShock");
     snprintf(fullname, sizeof(fullname), "%s%s", path, PREFS_FILENAME);
-    free(path);
+    // free(path);
     return fopen(fullname, mode);
 }
 

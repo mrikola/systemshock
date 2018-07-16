@@ -40,13 +40,7 @@ extern char *modding_archive_override;
 #define CURRENT_GAME_FNAME "CurrentGame.dat"
 #define ARCHIVE_FNAME (modding_archive_override != NULL ? modding_archive_override : "res/data/archive.dat")
 
-<<<<<<< HEAD
-// #define ResIdFromLevel(level) (SAVE_GAME_ID_BASE+(level*NUM_RESIDS_PER_LEVEL)+2)
-
-Id ResIdFromLevel(int level);
-=======
 #define ResIdFromLevel(level) (SAVE_GAME_ID_BASE + (level * NUM_RESIDS_PER_LEVEL) + 2)
->>>>>>> master
 
 // Defines
 
