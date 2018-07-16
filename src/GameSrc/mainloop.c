@@ -51,10 +51,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <setup.h>
 #include <status.h>
 #include "Carbon/Carbon.h"
+#include "cutsloop.h"
 
 /*
 #include <loopdbg.h>
-#include <cutsloop.h>
 #include <cutscene.h>
 
 #include <wsample.h>
@@ -80,12 +80,9 @@ extern void amap_exit();
 // void (*exit_modes[])(void)={screen_exit,fullscreen_exit,screen_exit,
 // screen_exit,setup_exit,screen_exit,cutscene_exit,fullscreen_exit,amap_exit};
 
-void (*citadel_loops[])(void) = {game_loop, game_loop, game_loop, game_loop,   setup_loop,
-                                 game_loop, NULL,      game_loop, automap_loop};
-void (*enter_modes[])(void) = {screen_start, fullscreen_start, NULL,      NULL, setup_start, NULL,
-                               NULL,         fullscreen_start, amap_start};
-void (*exit_modes[])(void) = {screen_exit, fullscreen_exit, NULL,     NULL, setup_exit, NULL,
-                              NULL,        fullscreen_exit, amap_exit};
+void (*citadel_loops[])(void) = {game_loop, game_loop, game_loop, game_loop, setup_loop, game_loop, cutscene_loop, game_loop, automap_loop};
+void (*enter_modes[])(void) = {screen_start, fullscreen_start, NULL, NULL, setup_start, NULL, cutscene_start, fullscreen_start, amap_start};
+void (*exit_modes[])(void) = {screen_exit, fullscreen_exit, NULL, NULL, setup_exit, NULL, cutscene_exit, fullscreen_exit, amap_exit};
 
 void loopmode_switch(short *cmode) {
 #ifdef SVGA_SUPPORT
@@ -151,8 +148,7 @@ void mainloop(int argc, char *argv[]) {
 
         MousePollProc(); // update the cursor, was 35 times/sec originally
 
-        if (_current_loop != SETUP_LOOP)
-            status_bio_update();
+        status_bio_update();
 
         SDLDraw();
     }

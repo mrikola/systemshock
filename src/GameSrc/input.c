@@ -2264,6 +2264,11 @@ uchar view3d_mouse_handler(uiMouseEvent *ev, LGRegion *r, view3d_data *data) {
         data->lastleft = MakePoint(-100, -100);
     }
 
+    if (ev->action & (MOUSE_WHEELUP | MOUSE_WHEELDN)) {
+        extern uchar cycle_weapons_func(ushort keycode, ulong context, int data);
+        cycle_weapons_func(0, 0, ev->action & MOUSE_WHEELUP ? -1 : 1);
+    }
+
     // data->ldown = TRUE;
 
     // Do mouse motion.

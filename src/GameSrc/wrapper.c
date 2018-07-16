@@ -95,6 +95,7 @@ extern void text_button(char *text, int xc, int yc, int col, int shad, int w, in
 #define MOUSE_DOWN (MOUSE_LDOWN | MOUSE_RDOWN | UI_MOUSE_LDOUBLE)
 #define MOUSE_UP   (MOUSE_LUP | MOUSE_RUP)
 #define MOUSE_LEFT (MOUSE_LDOWN | UI_MOUSE_LDOUBLE)
+#define MOUSE_WHEEL (MOUSE_WHEELUP | MOUSE_WHEELDN)
 
 #define STATUS_X      4
 #define STATUS_Y      1
@@ -463,7 +464,14 @@ uchar slider_handler(uiEvent *ev, uchar butid) {
         }
         break;
     case UI_EVENT_MOUSE:
-        st->sliderpos = mev->pos.x - BR(butid).ul.x;
+        if (mev->action & MOUSE_WHEELUP) {
+            st->sliderpos = st->sliderpos <= 5 ? 0 : st->sliderpos - 5;
+        } else if (mev->action & MOUSE_WHEELDN) {
+            uchar max = BR(butid).lr.x - BR(butid).ul.x - 3;
+            st->sliderpos = lg_min(st->sliderpos + 5, max);
+        } else {
+            st->sliderpos = mev->pos.x - BR(butid).ul.x;
+        }
         slider_deal(butid, TRUE);
         draw_button(butid);
         return TRUE;
@@ -994,7 +1002,7 @@ uchar opanel_mouse_handler(uiEvent *ev, LGRegion *r, void *user_data) {
 
     if (!ev->type && (UI_EVENT_MOUSE | UI_EVENT_MOUSE_MOVE))
         return FALSE;
-    if (ev->type == UI_EVENT_MOUSE && !(ev->subtype & (MOUSE_DOWN | MOUSE_UP)))
+    if (ev->type == UI_EVENT_MOUSE && !(ev->subtype & (MOUSE_DOWN | MOUSE_UP | MOUSE_WHEEL)))
         return FALSE;
 
     mev.pos.x -= inventory_region->r->ul.x;
@@ -1506,7 +1514,7 @@ void screenmode_change(uchar new_mode) {
     change_mode_func(0, 0, (void *)(unsigned int)_current_loop);
     wrapper_screenmode_hack = TRUE;
 
-    printf("Changed screen mode to %i\n", mode_id);
+    INFO("Changed screen mode to %i\n", mode_id);
     wrapper_panel_close(TRUE);
 }
 #endif
@@ -1957,12 +1965,11 @@ void load_dealfunc(uchar butid, uchar index) {
     begin_wait();
     Poke_SaveName(index);
     // Spew(DSRC_EDITOR_Save,("attempting to load from %s\n",save_game_name));
-    printf("Attempting to load from %s\n", save_game_name);
 
     if (load_game(save_game_name) != OK) {
         Warning(("Load game failed!\n"));
     } else {
-        printf("Game loaded!\n");
+        INFO("Game %d loaded!", index);
         // Spew(DSRC_EDITOR_Restore,("Game %d loaded!\n",index));
     }
     end_wait();
@@ -1990,7 +1997,6 @@ void load_screen_init(void) {
 //
 
 void save_dealfunc(uchar butid, uchar index) {
-    printf("Saving!\n");
     if (!ObjSysOkay()) {
         string_message_info(REF_STR_ObjSysBad);
         savegame_verify = index;
@@ -2076,7 +2082,6 @@ errtype check_free_diskspace(int *needed) {
 }
 
 errtype do_savegame_guts(uchar slot) {
-    printf("do_savegame_guts\n");
     extern uchar valid_save;
     errtype retval = OK;
 
@@ -2093,7 +2098,7 @@ errtype do_savegame_guts(uchar slot) {
     if (retval == OK) {
         Poke_SaveName(slot);
         if (save_game(save_game_name, comments[slot]) != OK) {
-            // Spew(DSRC_EDITOR_Save, ("Save game failed!\n"));
+            ERROR("Save game failed!");
             message_info("Game save failed!");
             //      strcpy(comments[comment_mode], original_comment);
             retval = ERR_NOEFFECT;
@@ -2132,7 +2137,6 @@ uchar wrapper_region_mouse_handler(uiMouseEvent *ev, LGRegion *r, void *data) {
 #pragma enable_message(202)
 
 errtype make_options_cursor(void) {
-    printf("make_options_cursor\n");
     char *s;
     short w, h;
     LGPoint hot = {0, 0};

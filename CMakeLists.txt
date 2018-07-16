@@ -9,6 +9,7 @@ set(CMAKE_C_STANDARD 99)
 # set(CMAKE_VERBOSE_MAKEFILE true)
 
 option(ENABLE_EXAMPLES "Enable example applications" OFF)
+option(ENABLE_DEBUG_BLIT "Enable debugging blitter" OFF)
 
 # TODO compile the main SDL and make a similar thing for it
 # right now my SDL installation is found via ${SDL2_DIR}
@@ -21,6 +22,11 @@ set(SDL2_MIXER_PATH "build_ext/SDL_mixer")
 
 # HAAAAX!!
 add_definitions(-Dpowerc -DSVGA_SUPPORT -DSDL_MAIN_HANDLED)
+if(ENABLE_DEBUG_BLIT)
+	add_definitions(-DDEBUGGING_BLIT)
+endif()
+
+add_compile_options(-fno-strict-aliasing -Werror=implicit-function-declaration)
 
 # Find SDL, trying the easy way and then the hard way
 find_package(SDL2)
@@ -86,6 +92,7 @@ set(GAME_SRC
 	src/GameSrc/cybermfd.c
 	src/GameSrc/cybmem.c
 	src/GameSrc/cybrnd.c
+	src/GameSrc/cutsloop.c
 	src/GameSrc/damage.c
 	src/GameSrc/digifx.c
 	src/GameSrc/drugs.c

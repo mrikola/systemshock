@@ -65,6 +65,11 @@
 # (To distribute this file outside of CMake, substitute the full
 #  License text for the above reference.)
 
+unset(SDL2_LIBRARY CACHE)
+unset(SDL2_INCLUDE_DIR CACHE)
+unset(SDL2_LIBRARY_TEMP CACHE)
+unset(SDL2_SEARCH_PATHS CACHE)
+
 SET(SDL2_SEARCH_PATHS
 	${SDL2_PATH} # Local build
 	~/Library/Frameworks
@@ -79,9 +84,7 @@ SET(SDL2_SEARCH_PATHS
 )
 
 FIND_PATH(SDL2_INCLUDE_DIR SDL.h
-	HINTS
-	$ENV{SDL2DIR}
-	$ENV{SDL2_DIR}
+	HINTS $ENV{SDL2DIR}
 	PATH_SUFFIXES include/SDL2 include
 	PATHS ${SDL2_SEARCH_PATHS}
 )
@@ -90,7 +93,6 @@ FIND_LIBRARY(SDL2_LIBRARY_TEMP
 	NAMES SDL2 
 	HINTS
 	$ENV{SDL2DIR}
-	$ENV{SDL2_DIR}
 	PATH_SUFFIXES lib ${VC_LIB_PATH_SUFFIX}
 	PATHS ${SDL2_SEARCH_PATHS}
 )
