@@ -11,6 +11,7 @@
 #include "faketime.h"
 #include "setploop.h"
 #include "hkeyfunc.h"
+#include "kbcook.h"
 
 uiSlab cutscene_slab;
 LGRegion cutscene_root_region;

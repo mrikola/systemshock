@@ -26,7 +26,7 @@ if(ENABLE_DEBUG_BLIT)
 	add_definitions(-DDEBUGGING_BLIT)
 endif()
 
-add_compile_options(-fno-strict-aliasing -Werror=implicit-function-declaration)
+# add_compile_options(-fno-strict-aliasing -Werror=implicit-function-declaration)
 
 # Find SDL, trying the easy way and then the hard way
 find_package(SDL2)
