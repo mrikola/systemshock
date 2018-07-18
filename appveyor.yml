@@ -13,6 +13,10 @@ branches:
     - master
     - appveyor-config
 
+init:
+  - cd \
+  - dir libstdc++-6.dll /s
+	
 # This is necessary because AppVeyor creates a tag for otherwise untagged artifacts it releases
 # -- so without this we'd create releases forever
 skip_tags: true    
