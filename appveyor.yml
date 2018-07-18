@@ -13,7 +13,7 @@ branches:
     - master
     - appveyor-config
 
-init:
+install:
   - cd \
   - dir libstdc++-6.dll /s
 	
