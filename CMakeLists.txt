@@ -20,6 +20,9 @@ endif()
 
 add_compile_options(-fno-strict-aliasing -Werror=implicit-function-declaration)
 
+# Find OpenGL
+find_package(OpenGL)
+
 # Find SDL, trying the easy way and then the hard way
 find_package(SDL2)
 
@@ -320,6 +323,7 @@ target_link_libraries(systemshock
 	opengl32 
 	c:/wrk/systemshock/glew-2.1.0/lib/libglew32.a
 	c:/wrk/systemshock/glew-2.1.0/lib/libglew32.dll.a
+	${OPENGL_LIBRARIES}
 )
 
 # Turn on address sanitizing if wanted
