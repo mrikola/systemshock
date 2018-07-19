@@ -1,7 +1,7 @@
 #include "OpenGL.h"
 
 #define GL_GLEXT_PROTOTYPES
-#include <GL/gl.h>
+#include <GL/glew.h>
 #include <GL/glext.h>
 #include <SDL.h>
 #include <SDL_opengl.h>
@@ -74,8 +74,23 @@ static GLuint compileShader(GLenum type, const char *source) {
 }
 
 int init_opengl() {
+	printf("window pointer is %d\n", window);
+
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
+
     context = SDL_GL_CreateContext(window);
 
+	fprintf(stderr, "createContext(): %s\n", SDL_GetError());	
+	
+	glewExperimental = GL_TRUE;
+	GLenum err = glewInit();	
+	
+	if (!GLEW_VERSION_2_0)
+	   printf("No OpenGL v2.0 here\n");
+	
     glEnable(GL_CULL_FACE);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

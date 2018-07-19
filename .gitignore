@@ -47,6 +47,8 @@ TestSimpleMain
 
 # 3rd Party builds
 build_ext
+glew-2.1.0
+glm
 
 # Save files
 CurrentGame.dat

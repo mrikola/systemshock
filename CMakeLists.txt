@@ -37,6 +37,8 @@ find_package(SDL2_mixer)
 include_directories(
 	${SDL2_INCLUDE_DIRS}
 	${SDL2_MIXER_INCLUDE_DIRS}
+	glm/
+	glew-2.1.0/include
 )
 
 message(STATUS "Found SDL2 Include:${SDL2_INCLUDE_DIRS} Library:${SDL2_LIBRARIES}")
@@ -315,7 +317,9 @@ target_link_libraries(systemshock
 	FIXPP_LIB
 	${SDL2_LIBRARIES}
 	${SDL2_MIXER_LIBRARIES}
-	GL
+	opengl32 
+	c:/wrk/systemshock/glew-2.1.0/lib/libglew32.a
+	c:/wrk/systemshock/glew-2.1.0/lib/libglew32.dll.a
 )
 
 # Turn on address sanitizing if wanted
