@@ -55,7 +55,7 @@ function get_cmake {
 }
 
 ## Actual building starts here
-
+dos2unix shaders/*.frag
 if [ -d ./build_ext/ ]; then
 	echo A directory named build_ext already exists.
 	echo Please remove it if you want to recompile.
