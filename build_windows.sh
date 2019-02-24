@@ -15,33 +15,21 @@ function remove_mwindows {
 }
 
 function build_sdl {
-	curl -O https://www.libsdl.org/release/SDL2-${SDL_version}.tar.gz
-	tar xvf SDL2-${SDL_version}.tar.gz
-	pushd SDL2-${SDL_version}
-
-	./configure "CFLAGS=-m32" "CXXFLAGS=-m32" --host=i686-w64-mingw32 --prefix=${install_dir}/built_sdl
-	remove_mwindows
-	make
-	make install
-
-	popd
+	curl -O https://www.libsdl.org/release/SDL2-devel-${SDL_version}-mingw.tar.gz
+	tar xvf SDL2-devel-${SDL_version}-mingw.tar.gz
+	mkdir built_sdl
+	cp -r SDL2-${SDL_version}/i686-w64-mingw32/* built_sdl/
 }
 
 function build_sdl_mixer {
-	curl -O https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-${SDL2_mixer_version}.tar.gz
+	curl -O https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-devel-${SDL2_mixer_version}-mingw.tar.gz	
+
 	# Do not extract the Xcode subdirectory because it contains symlinks.
 	# They cannot be extracted on Windows because the files in the archive are in the wrong order so
 	# the target of the link cannot be found at the time of the extraction.
-	tar xf SDL2_mixer-${SDL2_mixer_version}.tar.gz --exclude=Xcode
-	pushd SDL2_mixer-${SDL2_mixer_version}
-
-	./configure "CFLAGS=-m32" "CXXFLAGS=-m32" --host=i686-w64-mingw32 --disable-sdltest --with-sdl-prefix=${install_dir}/built_sdl --prefix=${install_dir}/built_sdl_mixer 
-	
-	remove_mwindows
-	make
-	make install
-
-	popd
+	tar xf SDL2_mixer-devel-${SDL2_mixer_version}-mingw.tar.gz --exclude=Xcode
+	mkdir built_sdl_mixer
+	cp -r SDL2_mixer-${SDL2_mixer_version}/i686-w64-mingw32/* built_sdl_mixer/
 }
 
 function build_glew {
@@ -102,11 +90,11 @@ if ! [ -x "$(command -v cmake)" ]; then
 	get_cmake
 fi
 
-build_fluidsynth
 
 build_sdl
 build_sdl_mixer
 build_glew
+build_fluidsynth
 
 
 # Back to the root directory, copy required DLL files for the executable
@@ -124,7 +112,7 @@ if [[ -z "${APPVEYOR}" ]]; then
 	echo "Normal build"
 	echo "@echo off
 	set PATH=%PATH%;${CMAKE_ROOT}
-	cmake -G \"${CMAKE_target}\" .
+	cmake -G \"MinGW Makefiles\" .
 	mingw32-make systemshock" >build.bat
 else
 	echo "Appveyor"
