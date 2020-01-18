@@ -4,7 +4,8 @@ notifications:
   email: false
 
 env:
-  - PACKAGE_NAME="shockolate-$TRAVIS_OS_NAME-${BITS}bit.tgz"
+  global:
+    - PACKAGE_NAME="shockolate-$TRAVIS_OS_NAME-${BITS}bit.tgz"
 
 matrix:
   include:
