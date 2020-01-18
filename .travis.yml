@@ -49,10 +49,6 @@ matrix:
         - FLUIDSYNTH_LIB=OFF # Bundled lib failed to compile
         - BITS=64
 
-env:
-  global:
-    - PACKAGE_NAME="shockolate-$TRAVIS_OS_NAME-${BITS}bit.tgz"
-
 script:
   - chmod a+rx ./osx-linux/*.sh
   - sudo TRAVIS=$TRAVIS ./osx-linux/install_${BITS}bit_sdl.sh
@@ -67,6 +63,7 @@ before_deploy:
   - cp osx-linux/run_${TRAVIS_OS_NAME}.sh shockolate/run.sh
   - cp -r shaders shockolate/
   - cp -r res shockolate/
+  - export PACKAGE_NAME="shockolate-$TRAVIS_OS_NAME-${BITS}bit.tgz"
   - echo ${PACKAGE_NAME}
   - tar zcfv ${PACKAGE_NAME} shockolate/
   - rm -r shockolate/
