@@ -3,10 +3,6 @@ language: c
 notifications:
   email: false
 
-env:
-  global:
-    - PACKAGE_NAME="shockolate-$TRAVIS_OS_NAME-${BITS}bit.tgz"
-
 matrix:
   include:
     - os: linux
@@ -52,6 +48,10 @@ matrix:
         - SDL2_MIXER_LIB=BUNDLED
         - FLUIDSYNTH_LIB=OFF # Bundled lib failed to compile
         - BITS=64
+
+env:
+  global:
+    - PACKAGE_NAME="shockolate-$TRAVIS_OS_NAME-${BITS}bit.tgz"
 
 script:
   - chmod a+rx ./osx-linux/*.sh
