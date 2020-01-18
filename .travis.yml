@@ -63,10 +63,10 @@ before_deploy:
   - cp systemshock shockolate
   - cp osx-linux/install_${BITS}bit_sdl.sh shockolate/install_sdl.sh
   - cp osx-linux/readme_osx_linux.md shockolate
-  - cp osx-linux/run_$TRAVIS_OS_NAME.sh shockolate/run.sh
+  - cp osx-linux/run_${TRAVIS_OS_NAME}.sh shockolate/run.sh
   - cp -r shaders shockolate/
   - cp -r res shockolate/
-  - tar zcfv $PACKAGE_NAME shockolate/
+  - tar zcfv ${PACKAGE_NAME} shockolate/
   - rm -r shockolate/
 
 deploy:
