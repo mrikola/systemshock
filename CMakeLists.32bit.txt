@@ -385,7 +385,7 @@ add_library(GAME_LIB ${GAME_SRC})
 
 # MINGW additional linker options
 if(MINGW)
-	set(WINDOWS_LIBRARIES "mingw32 -mwindows")
+	set(WINDOWS_LIBRARIES "mingw32")
 endif(MINGW)
 
 target_link_libraries(systemshock
